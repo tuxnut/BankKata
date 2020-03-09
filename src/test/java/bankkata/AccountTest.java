@@ -1,23 +1,51 @@
 package bankkata;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import java.util.Date;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.mockito.Mock;
 /**
  * Unit test for simple App.
  */
 public class AccountTest 
 {
-    @Test
-    public void shouldDepositAddStatementToHistory() {
-        StatementHistory history = new StatementHistory();
-        Account account = new Account(history);        
+    @Mock
+    private StatementHistory history;
+    
+    @Mock
+    private Account account;
 
-        Amount amount = new Amount(10);
-        Date date = new Date(10);
-        account.deposit(amount, date);
+    @BeforeEach
+    public void beforeEach() {
+        history = mock(StatementHistory.class);
+        account = new Account(history);
+    }
+
+    @Test
+    public void shouldDepositAddStatementToHistoryWithSameAmount() {
+        account.deposit(new Amount(10), new Date(10));
+
+        verify(history).addStatementLine(new Amount(10), new Date(10));
+    }
+
+    @Test
+    public void shouldWithdrawalAddStatementToHistoryWithInvertedAmount() {
+        account.withdrawal(new Amount(10), new Date(10));
+
+        verify(history).addStatementLine(new Amount(-10), new Date(10));
+    }
+
+    @Test
+    public void shouldPrintHistoryDisplayEveryStatements() {
+        account.deposit(new Amount(10), new Date(10));
+        account.deposit(new Amount(15), new Date(11));
+        account.withdrawal(new Amount(8), new Date(12));
 
         
+        account.printHistory();
     }
 }

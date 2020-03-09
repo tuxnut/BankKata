@@ -2,8 +2,6 @@ package bankkata;
 
 import java.util.Date;
 
-import bankkata.Statement.StatementType;
-
 /**
  * Account
  *
@@ -17,10 +15,13 @@ public class Account
     }
 
     public void deposit(Amount amount, Date date) {
-        statementHistory.addStatementLine(amount, date, StatementType.DEPOSIT);
+        statementHistory.addStatementLine(amount, date);
     }
 
     public void withdrawal(Amount amount, Date date) {
-        statementHistory.addStatementLine(amount, date, StatementType.WITHDRAWAL);
+        Amount withdrawalAmount = amount.negative();
+        statementHistory.addStatementLine(withdrawalAmount, date);
     }
+
+    public void printHistory() {}
 }
