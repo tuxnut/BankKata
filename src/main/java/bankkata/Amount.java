@@ -1,5 +1,7 @@
 package bankkata;
 
+import java.io.PrintStream;
+
 /**
  * Amount
  *
@@ -22,6 +24,14 @@ public class Amount
 
     public Amount negative() {
         return new Amount(-value);
+    }
+    
+    public Amount absoluteValue() {
+        return (this.value >= 0 ? new Amount(this.value) : negative()); 
+    }
+
+    public void print(PrintStream printer) {
+        printer.format("%10d", this.value);
     }
 
     @Override

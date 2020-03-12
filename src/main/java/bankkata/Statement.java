@@ -19,4 +19,9 @@ public class Statement {
 	public void print(PrintStream stream) {
 		
 	}
+
+	public Amount computeBalance(Amount amount) {
+		amount.add(this.amount);
+		return amount;
+	}
 }

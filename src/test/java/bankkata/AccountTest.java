@@ -3,11 +3,14 @@ package bankkata;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import java.io.PrintStream;
 import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 /**
  * Unit test for simple App.
  */
@@ -45,7 +48,12 @@ public class AccountTest
         account.deposit(new Amount(15), new Date(11));
         account.withdrawal(new Amount(8), new Date(12));
 
-        
-        account.printHistory();
+        // PrintStream printer = mock(PrintStream.class);
+        // account.printHistory(printer);
+
+        // InOrder inOrder = Mockito.inOrder(printer);
+        // inOrder.verify(printer).println("13/01/2012 | 2000.00  |          | 3000.00");
+        // inOrder.verify(printer).println("13/01/2012 | 2000.00  |          | 3000.00");
+        // inOrder.verify(printer).println("13/01/2012 | 2000.00  |          | 3000.00");
     }
 }
