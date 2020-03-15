@@ -2,10 +2,6 @@ package bankkata;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import java.io.PrintStream;
 
 public class AmountTest 
 {
@@ -13,6 +9,12 @@ public class AmountTest
     public void shouldAmountEqualsSameValueAmount() {
         assertThat(new Amount(5)).isNotEqualTo(new Amount(8));
         assertThat(new Amount(5)).isEqualTo(new Amount(5));
+    }
+
+    @Test
+    public void shouldisPositiveReturnsTrueWhenPositive() {
+        assertThat(new Amount(6).isAmountPositive()).isEqualTo(true);
+        assertThat(new Amount(-9).isAmountPositive()).isEqualTo(false);
     }
 
     @Test
@@ -45,11 +47,9 @@ public class AmountTest
 
     @Test
     public void shouldPrintItself() {
-        Amount amount = new Amount(10);
-        PrintStream printer = mock(PrintStream.class);
-
-        amount.print(printer);
-
-        verify(printer).format("%10d", 10);
+        Amount positiveAmount = new Amount(10);
+        assertThat(positiveAmount.printFormattedValue()).isEqualTo("      10");
+        Amount negativeAmount = new Amount(-10);
+        assertThat(negativeAmount.printFormattedValue()).isEqualTo("      10");
     }
 }

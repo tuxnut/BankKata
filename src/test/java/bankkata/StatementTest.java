@@ -28,7 +28,14 @@ public class StatementTest
     }
     
     @Test
-    public void shouldPrintIself() {
-        Statement statement = new Statement(new Amount(-50), new Date(10));
+    public void shouldPrintADepositStatement() {
+        Statement statement = new Statement(new Amount(50), new Date(10));
+        assertThat(statement.printFormattedStatement(new Amount(0))).isEqualTo("1970-01-01 |       50 |          |       50");
+    }
+    
+    @Test
+    public void shouldPrintAWithdrawalStatement() {
+        Statement statement = new Statement(new Amount(-20), new Date(10));
+        assertThat(statement.printFormattedStatement(new Amount(80))).isEqualTo("1970-01-01 |          |       20 |       60");
     }
 }
